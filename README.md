@@ -14,7 +14,7 @@ The game displays a sequence of colors and sounds that players must repeat.
 The game tracks the player's score and displays it at the end of each round.
 The game has a strict mode, which causes players to lose the game if they make a mistake.
 The game has a start button to control gameplay.
-The game has an option to turn sound on and off.
+
 
 # Installation
 Clone the repository to your local machine.
