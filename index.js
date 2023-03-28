@@ -32,14 +32,6 @@ $(".yellow").click(function(){
 });
 
 
-// $(document).keydown(function(event){
-//
-//
-//       test();
-//
-//
-//   });
-
 
   $(".start").click(function(){
 
@@ -51,7 +43,7 @@ $(".yellow").click(function(){
         });
 
 
-//test();
+
 
 
 
@@ -59,16 +51,20 @@ var array = ["green", "red", "yellow", "blue"];
 var userArray= [];
 var randomArray= [];
 var randomNumber;
+var memoryArray = [] ;
 var len;
 var levelCounter = 0;
 
 function test()
  {
 
-      //console.log("inside test");
+      
     randomNumber= Math.floor(Math.random() * 4);
 
      randomArray.push(array[randomNumber]);
+
+    memoryArray.push(array[randomNumber]);
+    
 
 
      $("#"+array[randomNumber]).addClass("pressed");
@@ -90,16 +86,16 @@ function test()
 
 
 
-$(".btn").click(function(){
+$(".btn").click( function(){
 
-     //userArray.splice(0, userArray.length);
-    // console.log("inside click inside for");
+    
 
    userArray.push(this.id);
 
+
    soundPlay(this.id);
 
-    all();
+   nextLevel(this.id);
 
       });
 
@@ -107,29 +103,98 @@ $(".btn").click(function(){
 
 
 
-
-function all()
+ function  nextLevel(id)
 {
 
-         var result =  arraysAreIdentical(userArray, randomArray);
+        
+
+      let checkArrayEquality; 
 
 
-         if(result === 2)
+     if(userArray.indexOf(id) === randomArray.indexOf(id) )
+      {
+         if (userArray.length === randomArray.length) {
+         if (userArray.toString() === randomArray.toString()) {
+             
+              
+              checkArrayEquality = "equal"
+
+             } 
+        else {
+               
+              
+              checkArrayEquality = "Not-equal"
+             }
+
+        }
+
+    }
+
+  else
+  {
+    
+    checkArrayEquality = "Not-equal"
+  }
+
+        
+
+          let newAr  = memoryArray.slice(0,-1) ;
+
+         if(checkArrayEquality === "equal")
          {
 
+           
+           
 
-           setTimeout(function() { test() } ,1000);
+             if(newAr.length > 0)
+             {
+
+               setTimeout(() => {
+
+                Promise.all(memoryArray.map((element, i) => {
+                  return new Promise((resolve) => {
+                    setTimeout(() => {
+                      $("#" + element).addClass("pressed");
+                      setTimeout(() => {
+                        $("#" + element).removeClass("pressed");
+                      }, 100);
+                      soundPlay(element);
+                      resolve();
+                    }, i * 1000);
+                  });
+                })).then(() => {
+                   setTimeout(function() { test() } ,1100);
+                 
+                });
+
+               },1000)
+              
+
+
+             }
+
+
+             else{
+               setTimeout(function() { test() } ,1000);
+             }
+             
+
+               
+                
+                
+
+
+           
 
 
          }
 
-         if(userArray.length === randomArray.length)
+       
 
-         {
+          if(checkArrayEquality === "Not-equal")
 
-                 if(result === 1)
                  {
-                   //alert("game over");
+                   
 
                    soundPlay("wrong");
 
@@ -145,11 +210,15 @@ function all()
                    $(".start").show();
                    $("#game-rule").show();
 
+                   
+
                     randomArray.splice(0, randomArray.length);
                     userArray.splice(0, userArray.length);
+                    memoryArray.splice(0, memoryArray.length);
+                    
                  }
 
-           }
+                
 
 
 
@@ -157,22 +226,6 @@ function all()
 
 }
 
-
-
-
-
-function arraysAreIdentical(arr1, arr2){
-
- //console.log("inside arraysAreIdentical");
- if (arr1.length !== arr2.length) return 1;
- for (var i = 0, len = arr1.length; i < len; i++){
-     if (arr1[i] !== arr2[i]){
-         return 1;
-     }
- }
- return 2;
-
-}
 
 
 
