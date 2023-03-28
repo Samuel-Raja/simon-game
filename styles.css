@@ -75,8 +75,21 @@ body {
 
 a{
 
-  background-color: #a8a832;
-  color: #a83244;
+  /* background-color: #a8a832;
+  color: #a83244; */
+  color: #1ddd53;
+  text-decoration: none;
+  
+  
+  
+}
+
+a:hover {
+
+  color: #e8db1c;
+  cursor: pointer;
+  
+
 }
 
 
@@ -86,4 +99,75 @@ footer{
   color: white;
   margin-top: 150px;
   padding-top: 125px;
+}
+
+
+
+@media screen and (min-width: 1024px) {
+  /* For desktop: */
+
+  
+  body {
+    overflow-y: hidden;
+    
+  }
+  
+  .container {
+    display: block;
+    /* width: 50%; */
+    margin-top:  0px;
+  
+  }
+
+  .start{
+
+    margin-top: 2px;
+     color: black;
+     background-color: orange;
+    font-size: 3rem;
+  }
+
+  .btn {
+    margin: 45px;
+    display: inline-block;
+    height: 160px;
+    width: 160px;
+  
+  
+    border: 10px solid black;
+    border-radius: 20%;
+    /* margin-right: 400px; */
+  }
+
+  #level-title {
+    /* font-family: 'Press Start 2P', cursive; */
+     font-family: cursive; 
+    font-size: 3rem;
+    margin:  5%;
+    color: #FEF2BF;
+    position:absolute;
+    margin-top: 200px;
+    margin-left: 1000px; 
+    }
+  
+
+  .container {
+    display: table;
+    /* width: 50%; */
+    margin-top:  5px;
+  
+  }
+
+  #game-rule {
+
+    font-size: 1.7rem;
+    color: white;
+    
+    margin-left: 1000px;
+    margin-bottom: 0px;
+    margin-top: 2px;
+    /* display: block; */
+    position: absolute;
+  }
+
 }
